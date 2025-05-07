@@ -1,13 +1,12 @@
+import type { Config } from "tailwindcss";
 
-import { defineConfig } from "tailwindcss";
-
-export default defineConfig({
+const config: Config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
   ],
   theme: {
     container: {
@@ -57,27 +56,11 @@ export default defineConfig({
           foreground: "hsl(var(--sidebar-foreground))",
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
-          primary: {
-            DEFAULT: "hsl(var(--sidebar-primary))",
-            foreground: "hsl(var(--sidebar-primary-foreground))",
-          },
-          accent: {
-            DEFAULT: "hsl(var(--sidebar-accent))",
-            foreground: "hsl(var(--sidebar-accent-foreground))",
-          }
-        },
-        purple: {
-          50: '#F6F4FE',
-          100: '#ECE9FD',
-          200: '#D5CCFA',
-          300: '#BDAFF7',
-          400: '#A592F4',
-          500: '#8D75F1',
-          600: '#764CED',
-          700: '#5A23E4',
-          800: '#4717C6',
-          900: '#3512A2'
-        },
+          primary: "hsl(var(--sidebar-primary))",
+          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+          accent: "hsl(var(--sidebar-accent))",
+          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -100,5 +83,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
-});
+  plugins: [require("tailwindcss-animate")],
+};
+
+export default config;

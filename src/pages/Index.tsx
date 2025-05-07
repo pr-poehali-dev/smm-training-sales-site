@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -49,7 +48,7 @@ const Index = () => {
             <Button 
               className="apple-button apple-button-primary hidden md:flex h-10"
             >
-              Запросить демо
+              Связаться с нами
             </Button>
             
             <button className="md:hidden text-secondary">
@@ -78,12 +77,6 @@ const Index = () => {
                 >
                   Узнать больше
                 </Button>
-                <Button 
-                  variant="outline" 
-                  className="apple-button apple-button-outline h-12 text-base font-normal"
-                >
-                  Запросить демонстрацию
-                </Button>
               </div>
             </div>
             
@@ -106,13 +99,6 @@ const Index = () => {
           <p className="text-center text-apple-gray-medium mb-10 text-sm uppercase tracking-widest">
             Нам доверяют ведущие компании России
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60">
-            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 1" className="h-6 md:h-8" />
-            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 2" className="h-6 md:h-8" />
-            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 3" className="h-6 md:h-8" />
-            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 4" className="h-6 md:h-8" />
-            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 5" className="h-6 md:h-8" />
-          </div>
         </div>
       </section>
 
@@ -149,7 +135,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-semibold mb-3">Экспертные тренеры</h3>
                 <p className="text-apple-gray-medium">
-                  Наши специалисты имеют более 7 лет опыта работы с крупнейшими брендами России.
+                  Наши специалисты имеют более 11 лет опыта работы с крупнейшими брендами России.
                 </p>
               </CardContent>
             </Card>
@@ -181,11 +167,11 @@ const Index = () => {
             <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
               <CardContent className="p-8">
                 <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
-                  <Icon name="Clock" className="text-primary h-7 w-7" />
+                  <Icon name="Users" className="text-primary h-7 w-7" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Гибкое расписание</h3>
+                <h3 className="text-xl font-semibold mb-3">Адаптированная программа</h3>
                 <p className="text-apple-gray-medium">
-                  Занятия проводятся в удобное для ваших сотрудников время, без отрыва от работы.
+                  Программа, адаптированная специально для сотрудников именно вашей компании, учитывая уровень присутствия компании в соцсетях.
                 </p>
               </CardContent>
             </Card>
@@ -193,11 +179,11 @@ const Index = () => {
             <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
               <CardContent className="p-8">
                 <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
-                  <Icon name="Download" className="text-primary h-7 w-7" />
+                  <Icon name="ClipboardCheck" className="text-primary h-7 w-7" />
                 </div>
-                <h3 className="text-xl font-semibold mb-3">Полный доступ к материалам</h3>
+                <h3 className="text-xl font-semibold mb-3">Правовые аспекты</h3>
                 <p className="text-apple-gray-medium">
-                  После обучения у сотрудников остаются все учебные материалы и доступ к обновлениям.
+                  Программы специально адаптированы для присутствия компаний на российском рынке, учитывая правовые аспекты.
                 </p>
               </CardContent>
             </Card>
@@ -249,10 +235,6 @@ const Index = () => {
                   </li>
                 </ul>
                 <div className="flex flex-col">
-                  <p className="flex items-center mb-5">
-                    <span className="text-lg font-semibold mr-2">16 часов</span>
-                    <span className="text-apple-gray-medium text-sm">длительность</span>
-                  </p>
                   <Button className="apple-button apple-button-primary w-full">
                     Узнать подробнее
                   </Button>
@@ -293,10 +275,6 @@ const Index = () => {
                   </li>
                 </ul>
                 <div className="flex flex-col">
-                  <p className="flex items-center mb-5">
-                    <span className="text-lg font-semibold mr-2">24 часа</span>
-                    <span className="text-apple-gray-medium text-sm">длительность</span>
-                  </p>
                   <Button className="apple-button apple-button-primary w-full">
                     Узнать подробнее
                   </Button>
@@ -334,10 +312,6 @@ const Index = () => {
                   </li>
                 </ul>
                 <div className="flex flex-col">
-                  <p className="flex items-center mb-5">
-                    <span className="text-lg font-semibold mr-2">32 часа</span>
-                    <span className="text-apple-gray-medium text-sm">длительность</span>
-                  </p>
                   <Button className="apple-button apple-button-primary w-full">
                     Узнать подробнее
                   </Button>
@@ -394,71 +368,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Кейсы */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute -bottom-96 -left-96 w-[800px] h-[800px] bg-primary/5 rounded-full"></div>
-        <div className="container mx-auto relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4.5xl font-semibold tracking-tight mb-6">
-              Результаты наших клиентов
-            </h2>
-            <p className="text-apple-gray-medium text-lg">
-              Как наше обучение помогло компаниям улучшить их присутствие в социальных сетях и повысить эффективность.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-            <Card className="rounded-2xl overflow-hidden border-none shadow-apple hover:shadow-apple-hover transition-all">
-              <div className="h-60 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Кейс 1" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardContent className="p-8">
-                <div className="flex items-center mb-5">
-                  <div className="font-semibold">ООО "Технопром"</div>
-                  <div className="ml-auto text-sm text-apple-gray-medium">Промышленность</div>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Рост вовлеченности на 83%</h3>
-                <p className="text-apple-gray-medium mb-6">
-                  После обучения команды из 5 человек компания увеличила охват в социальных сетях и конверсию из соцсетей на 32%.
-                </p>
-                <Button variant="link" className="text-primary p-0 h-auto flex items-center group hover:no-underline">
-                  <span className="group-hover:underline">Подробнее о кейсе</span>
-                  <Icon name="ArrowRight" className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
-            
-            <Card className="rounded-2xl overflow-hidden border-none shadow-apple hover:shadow-apple-hover transition-all">
-              <div className="h-60 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1491336477066-31156b5e4f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Кейс 2" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <CardContent className="p-8">
-                <div className="flex items-center mb-5">
-                  <div className="font-semibold">Сеть клиник "МедЭксперт"</div>
-                  <div className="ml-auto text-sm text-apple-gray-medium">Медицина</div>
-                </div>
-                <h3 className="text-xl font-semibold mb-3">Рост обращений на 47%</h3>
-                <p className="text-apple-gray-medium mb-6">
-                  Обучение отдела маркетинга привело к увеличению трафика из социальных сетей на 65% и росту записей через соцсети.
-                </p>
-                <Button variant="link" className="text-primary p-0 h-auto flex items-center group hover:no-underline">
-                  <span className="group-hover:underline">Подробнее о кейсе</span>
-                  <Icon name="ArrowRight" className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-24 bg-secondary" id="contact">
         <div className="container mx-auto text-center">
@@ -466,33 +375,25 @@ const Index = () => {
             Готовы повысить эффективность вашего SMM?
           </h2>
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            Запросите индивидуальное предложение для вашей компании. Мы подберем оптимальную программу под ваши задачи.
+            Свяжитесь с нами для получения подробной информации. Мы подберем оптимальную программу под ваши задачи.
           </p>
           
           <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-apple">
-            <form className="flex flex-col gap-4">
-              <input 
-                type="text" 
-                placeholder="Имя" 
-                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <input 
-                type="email" 
-                placeholder="Корпоративная почта" 
-                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <input 
-                type="tel" 
-                placeholder="Телефон" 
-                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <Button className="apple-button apple-button-primary mt-2 h-12">
-                Запросить предложение
-              </Button>
-              <p className="text-xs text-apple-gray-medium mt-2">
-                Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
-              </p>
-            </form>
+            <div className="flex flex-col gap-6 text-left">
+              <h3 className="text-xl font-semibold mb-2">Свяжитесь с нами:</h3>
+              <div className="flex items-center gap-3">
+                <Icon name="Phone" className="text-primary h-5 w-5" />
+                <a href="tel:+79032113045" className="text-secondary hover:text-primary transition-colors">
+                  8 (903) 211-30-45
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <Icon name="Mail" className="text-primary h-5 w-5" />
+                <a href="mailto:info@smmpro.ru" className="text-secondary hover:text-primary transition-colors">
+                  info@smmpro.ru
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -554,7 +455,7 @@ const Index = () => {
                 </li>
                 <li className="flex items-center">
                   <Icon name="Phone" className="h-4 w-4 text-primary mr-2" />
-                  <a href="tel:+74951234567" className="text-apple-gray-medium hover:text-primary transition-colors">+7 (495) 123-45-67</a>
+                  <a href="tel:+79032113045" className="text-apple-gray-medium hover:text-primary transition-colors">8 (903) 211-30-45</a>
                 </li>
               </ul>
             </div>
@@ -562,7 +463,7 @@ const Index = () => {
           
           <div className="mt-16 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-apple-gray-medium mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} SMMPro. Все права защищены.
+              &copy; {new Date().getFullYear()} SMMPro. Все права защищены. ИП Роговцева Евгения Александровна
             </p>
             <div className="flex space-x-6">
               <a href="#" className="text-sm text-apple-gray-medium hover:text-primary transition-colors">

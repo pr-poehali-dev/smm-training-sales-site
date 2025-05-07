@@ -1,399 +1,577 @@
 
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Icon from "@/components/ui/icon";
 
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <div className="flex flex-col min-h-screen bg-background">
-      {/* Навигация */}
-      <header className="container mx-auto py-6 px-4 md:px-0">
-        <nav className="flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold">
-            <span className="text-gold">SMM</span>
-            <span className="text-foreground">Pro</span>
-          </a>
-          <div className="hidden md:flex space-x-6 items-center">
-            <a href="#services" className="text-foreground/80 hover:text-gold transition">Услуги</a>
-            <a href="#programs" className="text-foreground/80 hover:text-gold transition">Программы</a>
-            <a href="#benefits" className="text-foreground/80 hover:text-gold transition">Преимущества</a>
-          </div>
-          <Button className="bg-gold text-purple-dark hover:bg-gold/90">Связаться с нами</Button>
-        </nav>
+      {/* Навигационная панель (фиксированная в стиле Apple) */}
+      <header 
+        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+          scrolled ? "nav-blur shadow-sm border-b border-gray-100" : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto">
+          <nav className="flex justify-between items-center h-16">
+            <a href="/" className="text-xl font-semibold flex items-center space-x-1">
+              <span className="text-apple-accent">SMM</span>
+              <span className="text-secondary">Pro</span>
+            </a>
+            
+            <div className="hidden md:flex space-x-8 items-center">
+              <a href="#benefits" className="text-apple-gray-medium hover:text-secondary text-sm transition">
+                Преимущества
+              </a>
+              <a href="#programs" className="text-apple-gray-medium hover:text-secondary text-sm transition">
+                Программы
+              </a>
+              <a href="#testimonials" className="text-apple-gray-medium hover:text-secondary text-sm transition">
+                Форматы
+              </a>
+              <a href="#contact" className="text-apple-gray-medium hover:text-secondary text-sm transition">
+                Контакты
+              </a>
+            </div>
+            
+            <Button 
+              className="apple-button apple-button-primary hidden md:flex h-10"
+            >
+              Запросить демо
+            </Button>
+            
+            <button className="md:hidden text-secondary">
+              <Icon name="Menu" className="h-6 w-6" />
+            </button>
+          </nav>
+        </div>
       </header>
 
-      {/* Герой-секция */}
-      <section className="bg-diagonal-lines bg-purple-dark py-20 md:py-28 hero-glow">
-        <div className="container mx-auto px-4 md:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                Корпоративное обучение <span className="text-gradient">SMM</span> и работе в соцсетях
+      {/* Первый экран / Hero */}
+      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-xl animate-fade-up">
+              <h1 className="text-4xl sm:text-5xl lg:text-5.5xl font-semibold tracking-tight leading-tight mb-6">
+                Обучаем сотрудников <span className="text-gradient">SMM</span>. 
+                <br className="hidden md:block" /> 
+                Легко. Понятно. Эффективно.
               </h1>
-              <p className="text-lg text-foreground/80 mb-8">
-                Увеличьте эффективность вашего бизнеса с помощью профессионального обучения сотрудников современным навыкам продвижения в социальных сетях.
+              <p className="text-lg text-apple-gray-medium mb-8 max-w-reading">
+                Современная программа корпоративного обучения, которая повышает эффективность работы с социальными сетями и приносит измеримые результаты.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-gold text-purple-dark hover:bg-gold/90 px-8 py-6 rounded-lg text-base">
-                  Запросить программу
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <Button 
+                  className="apple-button apple-button-primary h-12 text-base font-normal"
+                >
+                  Узнать больше
                 </Button>
-                <Button variant="outline" className="border-gold text-gold hover:bg-purple-medium px-8 py-6 rounded-lg text-base">
-                  Узнать стоимость
+                <Button 
+                  variant="outline" 
+                  className="apple-button apple-button-outline h-12 text-base font-normal"
+                >
+                  Запросить демонстрацию
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center">
-              <div className="rounded-2xl overflow-hidden card-highlight p-1 bg-gradient-to-tr from-purple-light via-gold/20 to-purple-light">
-                <img 
-                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80" 
-                  alt="Корпоративное обучение SMM" 
-                  className="rounded-2xl shadow-xl w-full max-w-md"
-                />
-              </div>
+            
+            <div className="relative animate-fade-up animate-delay-200">
+              <div className="absolute -top-12 -left-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+              <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                alt="Корпоративное обучение SMM" 
+                className="w-full h-auto rounded-2xl device-shadow relative z-10"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Блок "Почему выбирают нас" */}
-      <section className="py-20 bg-purple-dark" id="benefits">
-        <div className="container mx-auto px-4 md:px-0">
-          <h2 className="text-3xl font-bold text-center mb-12">Почему компании выбирают наше обучение</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-none bg-card shadow-lg hover:shadow-xl transition card-highlight">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-gold/20 w-12 h-12 flex items-center justify-center mb-4">
-                  <Icon name="Sparkles" className="text-gold h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Практический подход</h3>
-                <p className="text-foreground/80">Более 70% обучения состоит из практических заданий и разбора реальных кейсов.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-none bg-card shadow-lg hover:shadow-xl transition card-highlight">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-gold/20 w-12 h-12 flex items-center justify-center mb-4">
-                  <Icon name="GraduationCap" className="text-gold h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Экспертные преподаватели</h3>
-                <p className="text-foreground/80">Наши специалисты имеют более 7 лет опыта работы с крупнейшими брендами России.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-none bg-card shadow-lg hover:shadow-xl transition card-highlight">
-              <CardContent className="pt-6">
-                <div className="rounded-full bg-gold/20 w-12 h-12 flex items-center justify-center mb-4">
-                  <Icon name="BarChart" className="text-gold h-6 w-6" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Измеримые результаты</h3>
-                <p className="text-foreground/80">Проверка усвоения материала и разработка плана действий для вашей компании.</p>
-              </CardContent>
-            </Card>
+      {/* Логотипы клиентов */}
+      <section className="py-16 bg-apple-gray-light">
+        <div className="container mx-auto">
+          <p className="text-center text-apple-gray-medium mb-10 text-sm uppercase tracking-widest">
+            Нам доверяют ведущие компании России
+          </p>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-60">
+            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 1" className="h-6 md:h-8" />
+            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 2" className="h-6 md:h-8" />
+            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 3" className="h-6 md:h-8" />
+            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 4" className="h-6 md:h-8" />
+            <img src="https://placehold.co/120x40/black/white?text=ЛОГОТИП" alt="Клиент 5" className="h-6 md:h-8" />
           </div>
         </div>
       </section>
 
-      {/* Блок "Программы обучения" */}
-      <section className="py-20 bg-purple-medium" id="programs">
-        <div className="container mx-auto px-4 md:px-0">
-          <h2 className="text-3xl font-bold text-center mb-12">Программы корпоративного обучения</h2>
-          
-          <Tabs defaultValue="basic" className="max-w-4xl mx-auto">
-            <TabsList className="grid grid-cols-3 mb-8 bg-purple-dark">
-              <TabsTrigger value="basic" className="data-[state=active]:bg-gold data-[state=active]:text-purple-dark">Базовый курс</TabsTrigger>
-              <TabsTrigger value="advanced" className="data-[state=active]:bg-gold data-[state=active]:text-purple-dark">Продвинутый курс</TabsTrigger>
-              <TabsTrigger value="expert" className="data-[state=active]:bg-gold data-[state=active]:text-purple-dark">Экспертный курс</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="basic">
-              <Card className="border-none bg-card shadow-lg">
-                <CardContent className="pt-6">
-                  <h3 className="text-2xl font-semibold mb-4 text-gold">Базовый курс SMM</h3>
-                  <p className="text-foreground/80 mb-4">Идеально подходит для начинающих команд и сотрудников, которым необходимо освоить основы SMM.</p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Основы стратегии присутствия в социальных сетях</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Создание и планирование контента</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Работа с основными платформами (ВКонтакте, Telegram, Дзен)</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Начальная аналитика эффективности</span>
-                    </li>
-                  </ul>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-foreground/60">Длительность:</span>
-                      <span className="font-medium ml-2 text-gold">16 часов</span>
-                    </div>
-                    <Button className="bg-gold text-purple-dark hover:bg-gold/90">Подробнее</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="advanced">
-              <Card className="border-none bg-card shadow-lg">
-                <CardContent className="pt-6">
-                  <h3 className="text-2xl font-semibold mb-4 text-gold">Продвинутый курс SMM</h3>
-                  <p className="text-foreground/80 mb-4">Для команд с базовым опытом, которые хотят углубить свои знания и навыки.</p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Углубленная работа со стратегией и контент-планом</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Таргетированная реклама и продвижение</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Комьюнити-менеджмент и работа с аудиторией</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Расширенная аналитика и отчетность</span>
-                    </li>
-                  </ul>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-foreground/60">Длительность:</span>
-                      <span className="font-medium ml-2 text-gold">24 часа</span>
-                    </div>
-                    <Button className="bg-gold text-purple-dark hover:bg-gold/90">Подробнее</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="expert">
-              <Card className="border-none bg-card shadow-lg">
-                <CardContent className="pt-6">
-                  <h3 className="text-2xl font-semibold mb-4 text-gold">Экспертный курс SMM</h3>
-                  <p className="text-foreground/80 mb-4">Комплексная программа для опытных команд и руководителей SMM-отдела.</p>
-                  <ul className="space-y-2 mb-6">
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Построение комплексной стратегии присутствия бренда</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Управление кризисными коммуникациями</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Оптимизация воронки продаж через социальные сети</span>
-                    </li>
-                    <li className="flex items-center">
-                      <div className="rounded-full bg-gold/20 w-6 h-6 flex items-center justify-center mr-2">
-                        <Icon name="Check" className="text-gold h-4 w-4" />
-                      </div>
-                      <span>Интеграция SMM с общей маркетинговой стратегией</span>
-                    </li>
-                  </ul>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <span className="text-foreground/60">Длительность:</span>
-                      <span className="font-medium ml-2 text-gold">32 часа</span>
-                    </div>
-                    <Button className="bg-gold text-purple-dark hover:bg-gold/90">Подробнее</Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Блок "Наши услуги" */}
-      <section className="py-20 bg-purple-dark" id="services">
-        <div className="container mx-auto px-4 md:px-0">
-          <h2 className="text-3xl font-bold text-center mb-12">Формат проведения обучения</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border border-gold/20 bg-card hover:border-gold/60 transition duration-300 card-highlight">
-              <CardContent className="pt-6 flex flex-col items-center text-center">
-                <div className="rounded-full bg-gold/20 w-16 h-16 flex items-center justify-center mb-4">
-                  <Icon name="Users" className="text-gold h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Очные тренинги</h3>
-                <p className="text-foreground/80">Проводим занятия в вашем офисе или в нашем учебном центре в Москве.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border border-gold/20 bg-card hover:border-gold/60 transition duration-300 card-highlight">
-              <CardContent className="pt-6 flex flex-col items-center text-center">
-                <div className="rounded-full bg-gold/20 w-16 h-16 flex items-center justify-center mb-4">
-                  <Icon name="Monitor" className="text-gold h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Онлайн-обучение</h3>
-                <p className="text-foreground/80">Дистанционный формат с интерактивными занятиями в режиме реального времени.</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border border-gold/20 bg-card hover:border-gold/60 transition duration-300 card-highlight">
-              <CardContent className="pt-6 flex flex-col items-center text-center">
-                <div className="rounded-full bg-gold/20 w-16 h-16 flex items-center justify-center mb-4">
-                  <Icon name="Blend" className="text-gold h-8 w-8" />
-                </div>
-                <h3 className="text-xl font-semibold mb-3 text-gold">Смешанный формат</h3>
-                <p className="text-foreground/80">Комбинация очных занятий и онлайн-поддержки для максимальной эффективности.</p>
-              </CardContent>
-            </Card>
+      {/* Преимущества */}
+      <section className="py-24 bg-white" id="benefits">
+        <div className="container mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4.5xl font-semibold tracking-tight mb-6">
+              Почему компании выбирают наше обучение
+            </h2>
+            <p className="text-apple-gray-medium text-lg">
+              Мы создали методологию, которая помогает сотрудникам любого уровня быстро освоить 
+              принципы эффективного SMM и начать применять их на практике.
+            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Блок "Кейсы и результаты" */}
-      <section className="py-20 bg-purple-medium">
-        <div className="container mx-auto px-4 md:px-0">
-          <h2 className="text-3xl font-bold text-center mb-12">Результаты наших клиентов</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <Card className="overflow-hidden bg-card border-none shadow-lg">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-dark to-transparent opacity-60"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1552581234-26160f608093?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
-                  alt="Кейс 1" 
-                  className="w-full h-48 object-cover"
-                />
-              </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-semibold mb-2 text-gold">ООО "Технопром"</h3>
-                <p className="text-foreground/80 mb-4">
-                  После обучения команды из 5 человек, компания увеличила охват в социальных сетях на 83% и конверсию из соцсетей на 32%.
+          <div className="benefits-grid">
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="Sparkles" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Практический подход</h3>
+                <p className="text-apple-gray-medium">
+                  Более 70% обучения состоит из практических заданий и разбора реальных кейсов.
                 </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-foreground/60">Промышленность</span>
-                  <Button variant="link" className="text-gold p-0">Подробнее</Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="GraduationCap" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Экспертные тренеры</h3>
+                <p className="text-apple-gray-medium">
+                  Наши специалисты имеют более 7 лет опыта работы с крупнейшими брендами России.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="BarChart" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Измеримые результаты</h3>
+                <p className="text-apple-gray-medium">
+                  Проверка усвоения материала и разработка плана действий для вашей компании.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="Settings" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Индивидуальный подход</h3>
+                <p className="text-apple-gray-medium">
+                  Программа адаптируется под особенности и потребности конкретной компании.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="Clock" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Гибкое расписание</h3>
+                <p className="text-apple-gray-medium">
+                  Занятия проводятся в удобное для ваших сотрудников время, без отрыва от работы.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="border-none shadow-apple hover:shadow-apple-hover transition-all card-hover-effect bg-white rounded-2xl overflow-hidden">
+              <CardContent className="p-8">
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                  <Icon name="Download" className="text-primary h-7 w-7" />
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Полный доступ к материалам</h3>
+                <p className="text-apple-gray-medium">
+                  После обучения у сотрудников остаются все учебные материалы и доступ к обновлениям.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Программы обучения */}
+      <section className="pt-20 pb-32 relative overflow-hidden" id="programs">
+        <div className="absolute -top-96 -right-96 w-[800px] h-[800px] bg-primary/5 rounded-full"></div>
+        <div className="container mx-auto relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4.5xl font-semibold tracking-tight mb-6">
+              Программы корпоративного обучения
+            </h2>
+            <p className="text-apple-gray-medium text-lg">
+              Выберите программу, которая соответствует уровню подготовки ваших сотрудников и бизнес-задачам компании.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="border border-gray-100 rounded-2xl overflow-hidden hover:shadow-apple-hover transition-all p-1">
+              <CardContent className="p-8">
+                <div className="rounded-full bg-primary/10 w-14 h-14 flex items-center justify-center mb-5">
+                  <Icon name="Rocket" className="text-primary h-6 w-6" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-3">Базовый курс</h3>
+                <p className="text-apple-gray-medium mb-6">
+                  Для начинающих команд и сотрудников, осваивающих основы SMM.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Основы работы в социальных сетях</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Создание и планирование контента</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Базовая аналитика и отчетность</span>
+                  </li>
+                </ul>
+                <div className="flex flex-col">
+                  <p className="flex items-center mb-5">
+                    <span className="text-lg font-semibold mr-2">16 часов</span>
+                    <span className="text-apple-gray-medium text-sm">длительность</span>
+                  </p>
+                  <Button className="apple-button apple-button-primary w-full">
+                    Узнать подробнее
+                  </Button>
                 </div>
               </CardContent>
             </Card>
             
-            <Card className="overflow-hidden bg-card border-none shadow-lg">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-dark to-transparent opacity-60"></div>
+            <Card className="border-2 border-primary rounded-2xl overflow-hidden shadow-apple hover:shadow-apple-hover transition-all relative p-1">
+              <span className="absolute top-6 right-6 bg-primary text-white text-xs rounded-full px-3 py-1 font-medium">
+                Популярный
+              </span>
+              <CardContent className="p-8">
+                <div className="rounded-full bg-primary/10 w-14 h-14 flex items-center justify-center mb-5">
+                  <Icon name="Zap" className="text-primary h-6 w-6" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-3">Продвинутый курс</h3>
+                <p className="text-apple-gray-medium mb-6">
+                  Для команд с базовым опытом, готовых к следующему шагу.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Разработка стратегии присутствия</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Таргетированная реклама</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Управление комьюнити</span>
+                  </li>
+                </ul>
+                <div className="flex flex-col">
+                  <p className="flex items-center mb-5">
+                    <span className="text-lg font-semibold mr-2">24 часа</span>
+                    <span className="text-apple-gray-medium text-sm">длительность</span>
+                  </p>
+                  <Button className="apple-button apple-button-primary w-full">
+                    Узнать подробнее
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+            
+            <Card className="border border-gray-100 rounded-2xl overflow-hidden hover:shadow-apple-hover transition-all p-1">
+              <CardContent className="p-8">
+                <div className="rounded-full bg-primary/10 w-14 h-14 flex items-center justify-center mb-5">
+                  <Icon name="Award" className="text-primary h-6 w-6" />
+                </div>
+                <h3 className="text-2xl font-semibold mb-3">Экспертный курс</h3>
+                <p className="text-apple-gray-medium mb-6">
+                  Для опытных команд и руководителей SMM-отделов.
+                </p>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Интеграция с маркетингом</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Управление командой SMM</span>
+                  </li>
+                  <li className="flex items-center">
+                    <div className="rounded-full bg-green-100 w-5 h-5 flex items-center justify-center mr-3 flex-shrink-0">
+                      <Icon name="Check" className="text-green-600 h-3 w-3" />
+                    </div>
+                    <span className="text-sm text-apple-gray-medium">Кризисные коммуникации</span>
+                  </li>
+                </ul>
+                <div className="flex flex-col">
+                  <p className="flex items-center mb-5">
+                    <span className="text-lg font-semibold mr-2">32 часа</span>
+                    <span className="text-apple-gray-medium text-sm">длительность</span>
+                  </p>
+                  <Button className="apple-button apple-button-primary w-full">
+                    Узнать подробнее
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Форматы обучения */}
+      <section className="py-20 bg-apple-gray-light" id="testimonials">
+        <div className="container mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4.5xl font-semibold tracking-tight mb-6">
+              Форматы проведения обучения
+            </h2>
+            <p className="text-apple-gray-medium text-lg">
+              Выберите удобный формат обучения, который подойдет именно вашей компании.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl p-8 shadow-apple hover:shadow-apple-hover transition-all">
+              <div className="mb-6">
+                <Icon name="Users" className="text-primary h-10 w-10" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Очное обучение</h3>
+              <p className="text-apple-gray-medium">
+                Интенсивное обучение в вашем офисе или нашем учебном центре. Прямое взаимодействие с тренером и другими участниками.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-2xl p-8 shadow-apple hover:shadow-apple-hover transition-all">
+              <div className="mb-6">
+                <Icon name="Monitor" className="text-primary h-10 w-10" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Онлайн-обучение</h3>
+              <p className="text-apple-gray-medium">
+                Гибкий формат онлайн-занятий с интерактивными элементами и постоянной поддержкой тренера.
+              </p>
+            </div>
+            
+            <div className="bg-white rounded-2xl p-8 shadow-apple hover:shadow-apple-hover transition-all">
+              <div className="mb-6">
+                <Icon name="Blend" className="text-primary h-10 w-10" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Смешанный формат</h3>
+              <p className="text-apple-gray-medium">
+                Комбинация очных встреч с онлайн-поддержкой и дополнительными материалами для максимальной эффективности.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Кейсы */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute -bottom-96 -left-96 w-[800px] h-[800px] bg-primary/5 rounded-full"></div>
+        <div className="container mx-auto relative z-10">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4.5xl font-semibold tracking-tight mb-6">
+              Результаты наших клиентов
+            </h2>
+            <p className="text-apple-gray-medium text-lg">
+              Как наше обучение помогло компаниям улучшить их присутствие в социальных сетях и повысить эффективность.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <Card className="rounded-2xl overflow-hidden border-none shadow-apple hover:shadow-apple-hover transition-all">
+              <div className="h-60 overflow-hidden">
+                <img 
+                  src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                  alt="Кейс 1" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <CardContent className="p-8">
+                <div className="flex items-center mb-5">
+                  <div className="font-semibold">ООО "Технопром"</div>
+                  <div className="ml-auto text-sm text-apple-gray-medium">Промышленность</div>
+                </div>
+                <h3 className="text-xl font-semibold mb-3">Рост вовлеченности на 83%</h3>
+                <p className="text-apple-gray-medium mb-6">
+                  После обучения команды из 5 человек компания увеличила охват в социальных сетях и конверсию из соцсетей на 32%.
+                </p>
+                <Button variant="link" className="text-primary p-0 h-auto flex items-center group hover:no-underline">
+                  <span className="group-hover:underline">Подробнее о кейсе</span>
+                  <Icon name="ArrowRight" className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="rounded-2xl overflow-hidden border-none shadow-apple hover:shadow-apple-hover transition-all">
+              <div className="h-60 overflow-hidden">
                 <img 
                   src="https://images.unsplash.com/photo-1491336477066-31156b5e4f35?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
                   alt="Кейс 2" 
-                  className="w-full h-48 object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-semibold mb-2 text-gold">Сеть клиник "МедЭксперт"</h3>
-                <p className="text-foreground/80 mb-4">
-                  Обучили отдел маркетинга, что привело к увеличению трафика из социальных сетей на 65% и росту записей через соцсети на 47%.
-                </p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-foreground/60">Медицина</span>
-                  <Button variant="link" className="text-gold p-0">Подробнее</Button>
+              <CardContent className="p-8">
+                <div className="flex items-center mb-5">
+                  <div className="font-semibold">Сеть клиник "МедЭксперт"</div>
+                  <div className="ml-auto text-sm text-apple-gray-medium">Медицина</div>
                 </div>
+                <h3 className="text-xl font-semibold mb-3">Рост обращений на 47%</h3>
+                <p className="text-apple-gray-medium mb-6">
+                  Обучение отдела маркетинга привело к увеличению трафика из социальных сетей на 65% и росту записей через соцсети.
+                </p>
+                <Button variant="link" className="text-primary p-0 h-auto flex items-center group hover:no-underline">
+                  <span className="group-hover:underline">Подробнее о кейсе</span>
+                  <Icon name="ArrowRight" className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* CTA блок */}
-      <section className="py-20 bg-gradient-to-r from-purple-dark to-purple-medium relative overflow-hidden">
-        <div className="absolute inset-0 bg-diagonal-lines opacity-20"></div>
-        <div className="absolute top-[-50px] right-[-50px] w-[300px] h-[300px] bg-gold opacity-5 rounded-full blur-3xl"></div>
-        <div className="container mx-auto px-4 md:px-0 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Готовы повысить эффективность вашего SMM?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto text-foreground/80">
-            Запросите индивидуальное предложение для вашей компании. Мы подберем оптимальную программу обучения под ваши задачи.
+      {/* CTA */}
+      <section className="py-24 bg-secondary" id="contact">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4.5xl font-semibold text-white tracking-tight mb-8 max-w-2xl mx-auto">
+            Готовы повысить эффективность вашего SMM?
+          </h2>
+          <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
+            Запросите индивидуальное предложение для вашей компании. Мы подберем оптимальную программу под ваши задачи.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button className="bg-gold text-purple-dark hover:bg-gold/90 px-8 py-6 rounded-lg text-base font-medium">
-              Запросить предложение
-            </Button>
-            <Button variant="outline" className="border-gold text-gold hover:bg-purple-medium px-8 py-6 rounded-lg text-base font-medium">
-              Заказать обратный звонок
-            </Button>
+          
+          <div className="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-apple">
+            <form className="flex flex-col gap-4">
+              <input 
+                type="text" 
+                placeholder="Имя" 
+                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <input 
+                type="email" 
+                placeholder="Корпоративная почта" 
+                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <input 
+                type="tel" 
+                placeholder="Телефон" 
+                className="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <Button className="apple-button apple-button-primary mt-2 h-12">
+                Запросить предложение
+              </Button>
+              <p className="text-xs text-apple-gray-medium mt-2">
+                Нажимая на кнопку, вы даете согласие на обработку персональных данных и соглашаетесь с политикой конфиденциальности
+              </p>
+            </form>
           </div>
         </div>
       </section>
 
       {/* Футер */}
-      <footer className="bg-purple-dark py-12 border-t border-gold/10">
-        <div className="container mx-auto px-4 md:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <footer className="bg-apple-gray-light py-16">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             <div>
-              <h3 className="text-xl font-bold mb-4">
-                <span className="text-gold">SMM</span>
-                <span className="text-foreground">Pro</span>
+              <h3 className="text-lg font-semibold mb-6">
+                <span className="text-primary">SMM</span>
+                <span className="text-secondary">Pro</span>
               </h3>
-              <p className="mb-4 text-foreground/80">
+              <p className="text-apple-gray-medium mb-6">
                 Профессиональное обучение SMM и работе в социальных сетях для корпоративных клиентов.
               </p>
               <div className="flex space-x-4">
-                <a href="#" className="text-foreground/60 hover:text-gold">
-                  <Icon name="Facebook" />
+                <a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">
+                  <Icon name="Facebook" className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-foreground/60 hover:text-gold">
-                  <Icon name="Instagram" />
+                <a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">
+                  <Icon name="Instagram" className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-foreground/60 hover:text-gold">
-                  <Icon name="Linkedin" />
+                <a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">
+                  <Icon name="Linkedin" className="h-5 w-5" />
                 </a>
-                <a href="#" className="text-foreground/60 hover:text-gold">
-                  <Icon name="Twitter" />
+                <a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">
+                  <Icon name="Twitter" className="h-5 w-5" />
                 </a>
               </div>
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gold">Услуги</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Корпоративное обучение</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Консультации</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Аудит SMM</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Разработка стратегии</a></li>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-6">Программы</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Базовый курс</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Продвинутый курс</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Экспертный курс</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Индивидуальные программы</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4 text-gold">Компания</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">О нас</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Наша команда</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Карьера</a></li>
-                <li><a href="#" className="text-foreground/80 hover:text-gold transition">Блог</a></li>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-6">Компания</h4>
+              <ul className="space-y-3">
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">О нас</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Преподаватели</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Карьера</a></li>
+                <li><a href="#" className="text-apple-gray-medium hover:text-primary transition-colors">Блог</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-sm font-semibold uppercase tracking-wider mb-6">Контакты</h4>
+              <ul className="space-y-3">
+                <li className="flex items-center">
+                  <Icon name="Mail" className="h-4 w-4 text-primary mr-2" />
+                  <a href="mailto:info@smmpro.ru" className="text-apple-gray-medium hover:text-primary transition-colors">info@smmpro.ru</a>
+                </li>
+                <li className="flex items-center">
+                  <Icon name="Phone" className="h-4 w-4 text-primary mr-2" />
+                  <a href="tel:+74951234567" className="text-apple-gray-medium hover:text-primary transition-colors">+7 (495) 123-45-67</a>
+                </li>
               </ul>
             </div>
           </div>
           
-          <div className="mt-8 pt-8 border-t border-gold/10 text-center">
-            <p className="text-foreground/60">&copy; {new Date().getFullYear()} SMMPro. Все права защищены.</p>
+          <div className="mt-16 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-apple-gray-medium mb-4 md:mb-0">
+              &copy; {new Date().getFullYear()} SMMPro. Все права защищены.
+            </p>
+            <div className="flex space-x-6">
+              <a href="#" className="text-sm text-apple-gray-medium hover:text-primary transition-colors">
+                Политика конфиденциальности
+              </a>
+              <a href="#" className="text-sm text-apple-gray-medium hover:text-primary transition-colors">
+                Условия использования
+              </a>
+            </div>
           </div>
         </div>
       </footer>

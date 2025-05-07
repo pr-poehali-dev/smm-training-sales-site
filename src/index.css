@@ -4,40 +4,40 @@
 
 @layer base {
   :root {
-    --background: 271 60% 6%;
-    --foreground: 0 0% 95%;
-
-    --card: 271 60% 8%;
-    --card-foreground: 0 0% 95%;
-
-    --popover: 271 60% 8%;
-    --popover-foreground: 0 0% 95%;
-
-    --primary: 271 45% 20%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 47 100% 70%;
-    --secondary-foreground: 271 70% 15%;
-
-    --muted: 271 30% 15%;
-    --muted-foreground: 0 0% 80%;
-
-    --accent: 271 30% 25%;
-    --accent-foreground: 0 0% 100%;
-
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    
+    --primary: 252 56% 57%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    
+    --accent: 252 56% 57%;
+    --accent-foreground: 0 0% 98%;
+    
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 252 56% 57%;
+    
+    --radius: 0.75rem;
 
-    --border: 271 30% 20%;
-    --input: 271 30% 20%;
-    --ring: 271 30% 30%;
-
-    --radius: 0.5rem;
-
-    --gold: 47 100% 70%;
-    --purple-dark: 271 60% 10%;
-    --purple-medium: 271 50% 20%;
-    --purple-light: 271 40% 30%;
+    --apple-gray-dark: 240 5.9% 10%;
+    --apple-gray-medium: 240 4% 46%;
+    --apple-gray-light: 240 5% 96%;
+    --apple-accent: 252 56% 57%;
   }
 }
 
@@ -45,67 +45,116 @@
   * {
     @apply border-border;
   }
-
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-apple;
+    letter-spacing: -0.025em;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-apple-medium tracking-tight;
   }
 }
 
+/* Анимации для элементов */
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUpIn 0.7s ease-out forwards;
+}
+
+.animate-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animate-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animate-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animate-delay-400 {
+  animation-delay: 400ms;
+}
+
+/* Специальные стили в духе Apple */
+.nav-blur {
+  backdrop-filter: saturate(180%) blur(20px);
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.device-shadow {
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+}
+
+.gradient-overlay {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+}
+
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-[#FFD700] to-[#FFC107];
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, hsl(252, 56%, 57%), hsl(252, 56%, 67%));
 }
 
-.bg-diagonal-lines {
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.03) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.03) 50%,
-    rgba(255, 255, 255, 0.03) 75%,
-    transparent 75%,
-    transparent
-  );
-  background-size: 20px 20px;
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-highlight {
-  position: relative;
-  overflow: hidden;
+.card-hover-effect:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
-.card-highlight::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle,
-    rgba(255, 215, 0, 0.1) 0%,
-    rgba(255, 215, 0, 0) 70%
-  );
-  transform: rotate(30deg);
-  z-index: 0;
+/* Apple-подобная кнопка */
+.apple-button {
+  @apply relative overflow-hidden bg-secondary text-white font-medium rounded-full px-8 py-3 transition-all;
 }
 
-.hero-glow {
-  position: relative;
+.apple-button:hover {
+  @apply bg-secondary/90;
 }
 
-.hero-glow::after {
-  content: '';
-  position: absolute;
-  top: 40px;
-  right: 40px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(
-    circle,
-    rgba(255, 215, 0, 0.15) 0%,
-    rgba(255, 215, 0, 0) 70%
-  );
-  border-radius: 100%;
-  z-index: 0;
+.apple-button-primary {
+  @apply bg-primary text-white;
+}
+
+.apple-button-primary:hover {
+  @apply bg-primary/90;
+}
+
+.apple-button-outline {
+  @apply bg-transparent border border-secondary text-secondary;
+}
+
+.apple-button-outline:hover {
+  @apply bg-secondary/5;
+}
+
+/* Сетка для плиток преимуществ */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Визуальный стиль цитат */
+.quote-mark {
+  font-size: 4rem;
+  line-height: 0;
+  margin-top: 1.5rem;
+  height: 2rem;
+  display: block;
 }

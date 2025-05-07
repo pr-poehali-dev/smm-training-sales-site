@@ -13,7 +13,13 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: {
+        DEFAULT: "1rem",
+        sm: "2rem",
+        lg: "4rem",
+        xl: "5rem",
+        "2xl": "6rem",
+      },
       screens: {
         "2xl": "1400px",
       },
@@ -25,7 +31,6 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        gold: "hsl(var(--gold))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
@@ -54,9 +59,12 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        'purple-dark': "hsl(var(--purple-dark))",
-        'purple-medium': "hsl(var(--purple-medium))",
-        'purple-light': "hsl(var(--purple-light))",
+        'apple-gray': {
+          dark: "hsl(var(--apple-gray-dark))",
+          medium: "hsl(var(--apple-gray-medium))",
+          light: "hsl(var(--apple-gray-light))",
+        },
+        'apple-accent': "hsl(var(--apple-accent))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -64,13 +72,38 @@ const config = {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ["Inter var", ...fontFamily.sans],
+        'apple': ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', ...fontFamily.sans],
+        'apple-medium': ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Helvetica Neue', ...fontFamily.sans],
       },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'purple-gradient': 'linear-gradient(to right, hsl(271, 60%, 10%), hsl(271, 50%, 20%))',
-        'gold-gradient': 'linear-gradient(to right, hsl(47, 100%, 70%), hsl(45, 100%, 60%))',
+      fontSize: {
+        '4.5xl': '2.5rem',
+        '5.5xl': '3.5rem',
       },
+      spacing: {
+        '18': '4.5rem',
+        '22': '5.5rem',
+        '72': '18rem',
+        '84': '21rem',
+        '96': '24rem',
+      },
+      maxWidth: {
+        'reading': '72ch',
+      },
+      animation: {
+        'fade-in': 'fadeIn 1s ease-in-out forwards',
+        'fade-up': 'fadeUpIn 0.7s ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+      },
+      boxShadow: {
+        'apple': '0 4px 16px rgba(0, 0, 0, 0.1)',
+        'apple-hover': '0 12px 32px rgba(0, 0, 0, 0.12)',
+        'apple-button': '0 2px 6px rgba(0, 0, 0, 0.08)',
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],
